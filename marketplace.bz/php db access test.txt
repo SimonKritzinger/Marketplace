@@ -1,0 +1,162 @@
+<?php
+	require_once 'class.Foto.php';
+	class FotoDBZugriff{
+
+		public static function getFotos($suchbegriff){
+			$ret = "";
+			$mysqli = @new mysqli("localhost", "root", "masterkey", "fotogalerie");
+			if(mysqli_connect_errno())
+				echo "Verbindungsfehler";
+			else{
+				$sql = "SELECT * FROM fotos WHERE fsuchbegriffe LIKE \"%".$suchbegriff."%\"";
+				$stmt = $mysqli->prepare($sql);
+				if(!$stmt)
+					echo "Datenbankfehler";
+				else{
+					$stmt->execute();
+					$stmt->store_result();
+					$stmt->bind_result($fnummer, $fbeschreibung, $fdateiname, $fgroesse, $fmimetype, $fuploadzeitpunkt, $ffoto, $fsuchbegriffe, $fanzahlzugriffe);
+					$ret = array();
+					while($stmt->fetch()){
+						//echo $suchbegriffe;
+						$foto = new Foto($fnummer, $fbeschreibung, $fdateiname, $fgroesse, $fmimetype, $fuploadzeitpunkt, $ffoto, $fsuchbegriffe, $fanzahlzugriffe);
+						$ret[] = $foto;
+					}
+					$stmt->close();
+				}
+				$mysqli->close();
+			}
+			return $ret;
+		}
+
+		public static function sucheNummer($nummer){
+			$ret = "";
+			$mysqli = @new mysqli("localhost", "root", "masterkey", "fotogalerie");
+			if(mysqli_connect_errno())
+				echo "Verbindungsfehler";
+			else{
+				$sql = "SELECT * FROM fotos WHERE fnummer = ".$nummer;
+				$stmt = $mysqli->prepare($sql);
+				if(!$stmt)
+					echo "Datenbankfehler";
+				else{
+					$stmt->execute();
+					$stmt->store_result();
+					$stmt->bind_result($fnummer, $fbeschreibung, $fdateiname, $fgroesse, $fmimetype, $fuploadzeitpunkt, $ffoto, $fsuchbegriffe, $fanzahlzugriffe);
+					$stmt->fetch();
+					$ret = new Foto($fnummer, $fbeschreibung, $fdateiname, $fgroesse, $fmimetype, $fuploadzeitpunkt, $ffoto, $fsuchbegriffe, $fanzahlzugriffe);
+					$stmt->close();
+				}
+			}
+			$mysqli->close();
+			return $ret;
+		}
+
+		public static function aufnehmenFoto($foto){
+			$ret = true;
+			$mysqli = @new mysqli("localhost", "root", "masterkey", "fotogalerie");
+			if(mysqli_connect_errno()){
+				$ret = false;
+				echo "Verbindungsfehler";
+			}
+			else{
+				$sql = "INSERT INTO fotos(fbeschreibung, fdateiname, fgroesse, fmimetype, ffoto, fsuchbegriffe, fanzahlzugriffe) VALUES (?,?,?,?,?,?,?);";
+				$stmt = $mysqli->prepare($sql);
+				if(!$stmt){
+					$ret = false;
+					echo "Datenbankfehler ".$mysqli->error;
+				}
+				else{
+					$stmt->bind_param("ssisbsi", $beschreibung, $dateiname, $groesse, $mimetype, $ffoto, $suchbegriffe, $anzahlzugriffe);
+					$beschreibung = $foto->getBeschreibung();
+					$dateiname = $foto->getDateiname();
+					$groesse = $foto->getGroessebytes();
+					$mimetype = $foto->getMimetype();
+					$suchbegriffe = $foto->getSuchbegriffe();
+					$anzahlzugriffe = $foto->getAnzahlzugriffe();
+					$ffoto = null;
+					$stmt->send_long_data(4, $foto->getFoto());
+					$stmt->execute();
+					if($mysqli->errno){
+						$ret = false;
+						echo "Datenbankfehler ".$mysqli->error;
+					}
+					$stmt->close();
+				}
+			}
+			$mysqli->close();
+			return $ret;
+		}
+
+		public static function loescheFoto($nummer){
+			$ret = true;
+			$mysqli = @new mysqli("localhost", "root", "masterkey", "fotogalerie");
+			if(mysqli_connect_errno()){
+				$ret = false;
+				echo "Verbindungsfehler";
+			}else{
+				$sql = "DELETE FROM fotos WHERE fnummer = ".$nummer;
+				$stmt = $mysqli->prepare($sql);
+				if(!$stmt){
+					$ret = false;
+					echo "Datenbankfehler ".$mysqli->error;
+				}else{
+					$stmt->execute();
+					if($mysqli->errno){
+						$ret = false;
+						echo "Datenbankfehler ".$mysqli->error;
+					}
+					$stmt->close();
+				}
+			}
+			$mysqli->close();
+			return $ret;
+		}
+
+		public static function loeschealleFoto(){
+			$ret = true;
+			$mysqli = @new mysqli("localhost", "root", "masterkey", "fotogalerie");
+			if(mysqli_connect_errno()){
+				echo "Verbindungsfehler";
+				$ret = false;
+			}
+			else{
+				$sql = "DELETE FROM fotos";
+				$stmt = $mysqli->prepare($sql);
+				if(!$stmt){
+					echo "Datenbankfehler ".$mysqli->error;
+					$ret = false;
+				}
+				else{
+					$stmt->execute();
+					if($mysqli->errno){
+						echo "Datenbankfehler ".$mysqli->error;
+						$ret = false;
+					}
+					$stmt->close();
+				}
+			}
+			$mysqli->close();
+			return $ret;
+		}
+
+		public static function erhoeheAnzahlZugriffe($nummer){
+			$mysqli = @new mysqli("localhost", "root", "masterkey", "fotogalerie");
+			if(mysqli_connect_errno())
+				echo "Verbindungsfehler";
+			else{
+				$sql = "UPDATE fotos SET fanzahlzugriffe = fanzahlzugriffe +1 WHERE fnummer = ".$nummer;
+				$stmt = $mysqli->prepare($sql);
+				if(!$stmt)
+					echo "Datenbankfehler ".$mysqli->error;
+				else{
+					$stmt->execute();
+					if($mysqli->errno)
+						echo "Datenbankfehler ".$mysqli->error;
+					$stmt->close();
+				}
+			}
+			$mysqli->close();
+		}
+	}
+?>

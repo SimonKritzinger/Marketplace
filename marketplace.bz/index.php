@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<?php
+	require_once "inc/classes/Categories.php";
+    require_once "inc/classes/CategoriesDB.php";
+	require_once "inc/classes/Comments.php";
+    require_once "inc/classes/CommentsDB.php";
+    require_once "inc/classes/Images.php";
+    require_once "inc/classes/ImagesDB.php";
+    require_once "inc/classes/Post.php";
+    require_once "inc/classes/PostDB.php";
+    require_once "inc/classes/User.php";
+    require_once "inc/classes/UserDB.php";
+		session_start();
+	?>
+	
+	<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Project Marketplace">
+    <meta name="keywords" content="HTML,CSS,JS,JQUERY,javascript,purecss,php">
+    <meta name="author" content="Tonini Lukas, Rassele Kevin, Kritzinger Simon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>Marketplace</title>
+		<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css">
+
+    <!--  <link rel="stylesheet" href="inc/css/mycss.css">   -->
+    <link rel="stylesheet" href="inc/css/stylesheet.css">
+    <link rel="stylesheet" href="inc/css/zoom.css">
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	
+		<script src="inc/js/zoom.js"></script>
+		
+		<script>
+
+		function myFunction(){
+			<?php
+			$test = new CategoriesDB();
+			?>
+
+			alert("<?php echo $test->getCategories(); ?>")
+			
+		};   
+		</script>
+		<style>
+
+    </style>
+	</head>
+	<body>
+		<?php require_once("scripts/scr.Header.php"); ?>
+    <br><br>
+    <div class="pure-g">
+      <div class="pure-u-1-5">
+        <?php require_once("scripts/scr.CategoryList.php"); ?>
+      </div>
+      <div class="pure-u-3-5">
+        <?php
+          if(empty($_REQUEST["id"])){
+            require_once("scripts/scr.PostList.php");
+          }elseif($_REQUEST["id"] == 1){
+            require_once("scripts/scr.Post.php");
+          }
+        ?>
+      </div>
+      <div class="pure-u-1-5">
+        <?php require_once("scripts/scr.Advertisement.php"); ?>
+      </div>
+    </div>
+    <?php require_once("scripts/scr.Footer.php"); ?>
+
+	
+
+	?>
+    <?php
+      if(10 == 45){
+  			if(empty($_REQUEST["id"])){
+  				$suchbegriffe = $_POST["suchbegriffe"];
+  				require_once("scripts/scr.Fotoliste.php");
+
+  			} elseif($_REQUEST["id"] == 10){
+  				$_SESSION["foto"] = new Foto();
+  				$foto = $_SESSION["foto"];
+  				require_once("scripts/scr.EintragenFoto.php");
+  			} elseif($_REQUEST["id"] == 11){
+  				if(empty($_SESSION["foto"])){
+  					$_SESSION["foto"] = new Foto();
+  				}
+  				$foto = $_SESSION["foto"];
+  				$foto->setBeschreibung($_POST["beschreibung"]);
+  				$foto->setFotodatei($_FILES["foto"]);
+  				//var_dump($_FILES["foto"]);
+  				$foto->setSuchbegriffe($_POST["suchbegriffe"]);
+  				$foto->validiere();
+  				$fehler = $foto->getFehler();
+  				if(isset($fehler)){
+  					require_once 'scripts/scr.EintragenFoto.php';
+  					var_dump($fehler);
+  					echo "<br>";
+  					echo $fehler["groesse"];
+  				}else{
+  					if(FotoDBZugriff::aufnehmenFoto($foto)){
+  						unset($_SESSION["foto"]);
+  						//require_once 'scripts/scr.Fotoliste.php';
+  						echo '<script type="text/javascript">window.location="index.php" </script>';
+  					}else{
+  						$fehler = "Fehler beim Eintragen des Fotos in die Datenbank!";
+  						require_once 'scripts/scr.Fehler.php';
+  					}
+  				}
+
+  			} elseif($_REQUEST["id"] == 20){
+  				if(FotoDBZugriff::loescheFoto($_GET["nummer"])){
+  					require_once 'scripts/scr.Fotoliste.php';
+  				}else{
+  					$fehler = "Fehler beim Loeschen des Fotos in der Datenbank!";
+  					require_once 'scripts/scr.Fehler.php';
+  				}
+  			} elseif($_REQUEST["id"] == 22){
+  				if(FotoDBZugriff::loeschealleFoto()){
+  					require_once 'scripts/scr.Fotoliste.php';
+  				}else{
+  					$fehler = "Fehler beim Loeschen aller Fotos in der Datenbank!";
+  					require_once 'scripts/scr.Fehler.php';
+  				}
+  			}
+      }
+		?>
+	</body>
+</html>

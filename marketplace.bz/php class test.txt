@@ -1,0 +1,239 @@
+<?php
+/**
+ * Ein Objekt dieser Klasse nimmt ein Foto auf. Dabei liefert das Objekt
+ * das Bild so zur�ck, dass es im Browser angezeigt wird. Auch wird
+ * ein Miniaturbild des Fotos zur�ck geliefert
+ * @version 1
+ * @author Kritzinger Simon, Rassele Kevin, Tonini Lukas
+ */
+class Foto
+{
+	/*
+	 * Konstanten
+	 */
+	/**
+	 * Maximale Gr��e eines Fotos in Bytes
+	 */
+	const MAX_GROESSE = 3276800; //204800;
+	/**
+	 * Maximale Breite des Miniaturfotos
+	 */
+	const MIN_BREITE = 150;
+	/**
+	 * Maximale H�he des Miniaturfotos
+	 */
+	const MIN_HOEHE = 113;
+
+	/*
+	 * private Membervariablen
+	 */
+	private $nummer;
+	private $beschreibung;
+	private $dateiname;
+	private $groesse;
+	private $mimetype;
+	private $uploadzeitpunkt;
+	private $foto;
+	private $suchbegriffe;
+	private $anzahlzugriffe;
+	private $fehler;
+
+	/*
+	 * Konstruktor
+	 */
+	public function __construct($nummer = 0, $beschreibung = null, $dateiname = null, $groesse = 0, $mimetype = null,
+		$uploadzeitpunkt = null, $foto = null, $suchbegriffe = null, $anzahlzugriffe = 0) {
+		$this->nummer = $nummer;
+		$this->beschreibung = $beschreibung;
+		$this->dateiname = $dateiname;
+		$this->groesse = $groesse;
+		$this->mimetype = $mimetype;
+		$this->uploadzeitpunkt = $uploadzeitpunkt;
+		$this->foto = $foto;
+		$this->suchbegriffe = $suchbegriffe;
+		$this->anzahlzugriffe = $anzahlzugriffe;
+	}
+
+	/*
+	 * Getter- und Settermethoden
+	 */
+	public function getNummer() {
+		return $this->nummer;
+	}
+	/**
+	 * Wenn die Beschreibung der Datei nicht gesetzt ist, dann wird der
+	 * Dateiname der Datei als Beschreibung herangezogen
+	 */
+	public function getBeschreibung() {
+		$ret = $this->beschreibung;
+		if (empty($ret))
+			$ret = $this->dateiname;
+		return $ret;
+	}
+	public function setBeschreibung($beschreibung) {
+		$this->beschreibung = $beschreibung;
+	}
+	public function getDateiname() {
+		return $this->dateiname;
+	}
+	public function getGroessebytes() {
+		return $this->groesse;
+	}
+	public function getGroessekilobytes() {
+		return ceil($this->groesse / 1024);
+	}
+	public function getMimetype() {
+		return $this->mimetype;
+	}
+	public function getUploadzeitpunkt() {
+		return $this->uploadzeitpunkt;
+	}
+	public function getSuchbegriffe() {
+		return $this->suchbegriffe;
+	}
+	public function setSuchbegriffe($suchbegriffe) {
+		$this->suchbegriffe = $suchbegriffe;
+	}
+	public function getAnzahlzugriffe() {
+		return $this->anzahlzugriffe;
+	}
+	public function getFoto() {
+		return $this->foto;
+	}
+	/**
+	 * Methode erh�lt eine Datei von $_FILES und �bertr�gt Dateinamen, Gr��e,
+	 * Mimetype und Foto in das Objekt
+	 * @param Eine Datei von $_FILES welche als Bild interpretiert im Objekt abgelegt
+	 * werden soll
+	 */
+	public function setFotodatei($fotodatei) {
+		if (!empty($fotodatei) && $fotodatei["error"] == 0) {
+			$this->dateiname = $fotodatei["name"];
+			$this->groesse = $fotodatei["size"];
+			$this->mimetype = $fotodatei["type"];
+			// Auf Server abgespeicherte tempor�re Datei wird lesend (r) als bin�re
+			// (b) Datei ge�ffnet
+			$datei = fopen($fotodatei["tmp_name"], "rb");
+			// Aus Datei wird gelesen
+			$this->foto = fread($datei,$this->groesse);
+			fclose($datei);
+		}
+	}
+	/**
+	 * Liefert ein assoziatives Array von Objekteigenschaften und dazugeh�renden
+	 * Fehlermeldungen zur�ck
+	 * @return array() assoziatives Array mit Fehlermeldungen oder null, falls
+	 * das Foto korrekt und vollst�ndig ist
+	 */
+	public function getFehler() {
+		return $this->fehler;
+	}
+
+	/*
+	 * Methoden
+	 */
+	/**
+	 * Schreibt das verkleinerte Foto direkt in den Ausgabestrom des Skripts.
+	 * Die Methode setzt ebenfalls den HTTP-Header, das bedeutet, dass in PHP-Skripts
+	 * welche diese Methode aufrufen vor dem Aufruf der Methode keine Ausgaben
+	 * erfolgen d�rfen
+	 */
+	public function ausgabeMinfoto() {
+		if (!empty($this->foto)) {
+			$orifoto = imagecreatefromstring($this->foto);
+			$oribreite = imagesx($orifoto);
+			$orihoehe = imagesy($orifoto);
+			if ($oribreite > $orihoehe) {
+				// Originalfoto im Querformat
+				$rethoehe = $orihoehe * (Foto::MIN_BREITE / $oribreite);
+				$retbreite = Foto::MIN_BREITE;
+			} else {
+				// Originalfoto im Hochformat
+				$retbreite = $oribreite * (Foto::MIN_HOEHE / $orihoehe);
+				$rethoehe = Foto::MIN_HOEHE;
+			}
+			$ret = imagecreatetruecolor($retbreite, $rethoehe);
+			imagecopyresampled($ret,$orifoto,0,0,0,0,
+				$retbreite, $rethoehe,$oribreite,$orihoehe);
+			// ACHTUNG: Nachfolgender Befehl schreibt direkt in den Ausgabestrom
+			// des Skripts. Dabei wird der Header entsprechend gesetzt
+			header("Content-type: image/jpeg");
+			imagejpeg($ret);
+		}
+	}
+
+	/**
+	 * Schreibt das Foto direkt in den Ausgabestrom des Skripts.
+	 * Die Methode setzt ebenfalls den HTTP-Header, das bedeutet, dass in PHP-Skripts
+	 * welche diese Methode aufrufen vor dem Aufruf der Methode keine Ausgaben
+	 * erfolgen d�rfen. Diese Methode erh�ht auch die Anzahl der Zugriffe auf das
+	 * Foto um 1, denn nur wenn das Foto in seiner vollen Gr��e ausgegeben wird,
+	 * dann wird die Anzahl der Zugriffe erh�ht
+	 */
+	public function ausgabeFoto() {
+		if (!empty($this->foto)) {
+			header("Content-type: " . $this->getMimetype());
+			echo $this->foto;
+			// Erh�ht die Anzahl der Zugriffe auf das Foto um 1
+			require_once("class.FotoDBZugriff.php");
+			FotoDBZugriff::erhoeheAnzahlzugriffe($this->getNummer());
+		}
+	}
+
+	/**
+	 * Kontrolliert, ob das Foto korrekt ist. Ein Foto ist dann vollst�ndig,
+	 * wenn die Beschreibung (oder der Dateiname), die Gr��e, der Mimetype sowie
+	 * das Foto selbst enthalten sind. Weiters wird kontrolliert, ob das Foto
+	 * die zul�ssige Gr��e nicht �berschreitet und der Dateityp GIF, JPEG, oder PNG
+	 * ist. Sind diese Komponenten nicht korrekt dann wird das assoziative Array
+	 * fehler gef�llt. Dabei ist der Schl�ssel der Name der Eigenschaft und der Wert
+	 * die Fehlermeldung
+	 */
+	public function validiere() {
+		unset($this->fehler);
+		if ($this->getBeschreibung() == null) {
+			$this->fehler = array();
+			$this->fehler["beschreibung"] = "Die Beschreibung muss eingegeben werden";
+		}
+		if (empty($this->dateiname)) {
+			if (!isset($this->fehler))
+			 	$this->fehler = array();
+			$this->fehler["dateiname"] = "Der Dateiname muss festgelegt werden";
+		}
+		if (empty($this->groesse)) {
+			if (!isset($this->fehler))
+			 	$this->fehler = array();
+			$this->fehler["groesse"] = "Die Dateigr��e muss festgelegt werden";
+		} else {
+			// Kontrolle der Dateigr��e
+			if ($this->groesse > Foto::MAX_GROESSE) {
+				if (!isset($this->fehler))
+			    $this->fehler = array();
+				$this->fehler["groesse"] = "Die Dateigr��e �berschreitet " .
+					ceil(Foto::MAX_GROESSE / 1024) . " Kilobytes";
+			}
+		}
+		if (empty($this->mimetype)) {
+			if (!isset($this->fehler))
+			 $this->fehler = array();
+			$this->fehler["mimetype"] = "Der Dateityp muss festgelegt werden";
+		} else {
+			// Kontrolle des Mimetypes
+			if ($this->mimetype != "image/gif" &&
+				$this->mimetype != "image/jpeg" &&
+				$this->mimetype != "image/pjpeg" &&
+				$this->mimetype != "image/png" &&
+				$this->mimetype != "image/x-png") {
+				if (!isset($this->fehler))
+			  	$this->fehler = array();
+				$this->fehler["mimetype"] = $this->mimetype . "G�ltige Dateitypen: GIF, JPEG, PNG, BMP";
+			}
+		}
+		if (empty($this->foto)) {
+			if (!isset($this->fehler))
+			 $this->fehler = array();
+			$this->fehler["foto"] = "Das Foto muss festgelegt werden";
+		}
+	}
+}
+?>
