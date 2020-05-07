@@ -19,11 +19,13 @@
 			}else{
 				echo 'Connection status bad';
 			}
+			pg_close($db_connection);
 		}
 
-		public static storepassword(){
-			$stuser = $dbh-
-			>prepare("INSERIT INTO Muser(username, email, name, passwordhash) VALUES (:username, :email, :name, :passwordhash)");
+		public static function storepassword(){
+			$db_connection = pg_connect("host=localhost port=5433 dbname=postgres user=Admin password=master69key420");
+			
+			$stuser = $dbh->prepare("INSERT INTO Muser(username, email, name, passwordhash) VALUES (:username, :email, :name, :passwordhash)");
 
 			$stuser->bindParam(':username', $username);
 			$stuser->bindParam(':email', $email);
@@ -38,13 +40,16 @@
 			$hpassword = password_hash($password, PASSWORD_DEFAULT);
 
 			$stmt->execute();
+			
+			pg_close($db_connection);
 		}
 		
 
-		public static checkpassword(){
+		public static function checkpassword(){
 
 			$email = $_POST['email'];
 			$password = $_POST['lpassword'];
+			
 		}
 	}
 
