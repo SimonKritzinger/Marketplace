@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 	<?php
-	require_once "inc/classes/Categories.php";
+		require_once "inc/classes/Categories.php";
     require_once "inc/classes/CategoriesDB.php";
-	require_once "inc/classes/Comments.php";
+		require_once "inc/classes/Comments.php";
     require_once "inc/classes/CommentsDB.php";
     require_once "inc/classes/Images.php";
     require_once "inc/classes/ImagesDB.php";
@@ -13,7 +13,7 @@
     require_once "inc/classes/UserDB.php";
 		session_start();
 	?>
-	
+
 	<head>
     <meta charset="UTF-8">
     <meta name="description" content="Project Marketplace">
@@ -34,9 +34,9 @@
         <!--  <link rel="stylesheet" href="inc/css/mycss.css">   -->
     <link rel="stylesheet" href="inc/css/stylesheet.css">
     <link rel="stylesheet" href="inc/css/zoom.css">
-	
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script src="inc/js/zoom.js"></script>
-		
+
 		<script>
 
 		function myFunction(){
@@ -45,8 +45,8 @@
 			?>
 
 			alert("<?php echo $test->getCategories(); ?>")
-			
-		};   
+
+		};
 		</script>
 		<style>
 
@@ -74,7 +74,7 @@
     </div>
     <?php require_once("scripts/scr.Footer.php"); ?>
 
-	
+
 
 	?>
     <?php
