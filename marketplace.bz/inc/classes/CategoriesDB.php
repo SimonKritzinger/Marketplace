@@ -23,9 +23,11 @@
 		}
 
 		public static function storepassword(){
-			$db_connection = pg_connect("host=localhost port=5432 dbname=postgres user=Admin password=master69key420");
 			
+			
+			$db_connection = pg_connect("host=localhost port=5432 dbname=postgres user=Admin password=master69key420");
 			$stuser = $dbh->prepare("INSERT INTO Muser(username, email, name, passwordhash) VALUES (:username, :email, :name, :passwordhash)");
+			$stuser = $dbh->prepare("SELECT id, username, password FROM Muser WHERE email = :email");
 
 			$password = $_POST['password'];
 			$name = $_POST['name'];
@@ -37,21 +39,26 @@
 			$stuser->bindParam(':name', $name);
 			$stuser->bindParam(':passwordhash', $hpassword);
 
-			$hpassword = password_hash($password, PASSWORD_DEFAULT);
+			$result = pg_query($db_connection, $stuser);
 
-			$stmt->execute();
-			
+			if(pg_num_rows($result) != 0){
+
+				$message = "email already exists";
+				echo "<script type='text/javascript'>alert('$message');</script>";
+
+			}else{
+
+				$hpassword = password_hash($password, PASSWORD_DEFAULT);
+
+				$stmt->execute();	
+			}
+
 			pg_close($db_connection);
 		}
 		
 
 		public static function loginuser(){
-			
-			if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-				header("location: welcome.php");
-				exit;
-			}
-
+	
 			$db_connection = pg_connect("host=localhost port=5433 dbname=postgres user=Admin password=master69key420");
 			$stuser = $dbh->prepare("SELECT id, username, password FROM Muser WHERE email = :email");
 
@@ -69,7 +76,7 @@
 				$password = pg_fetch_result($result, 0, 2);
 
 				if(password_verify($passowrd, $lpassword)){
-					$_SESSION["loggedin"] = true
+					
 					$_SESSION["id"] = $id;
 					$_SESSION["lusername"] = $username;
 
@@ -81,12 +88,15 @@
 
 			}
 			
-			pg_close($db_connection);
+			pg_close($db_connection);	
+			
+		}
 
-			
-			
-			
-			
+
+		public static function insertpost(){
+
+			$post = $_POST['password'];
+			$picutres = $_POST['name'];
 		}
 	}
 
