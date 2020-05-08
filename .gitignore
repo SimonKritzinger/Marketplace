@@ -1,8 +1,8 @@
 
 marketplace.bz/.idea/
 memcached/
-mognodb/
 no-php/
 phpinfo/
 postgresql/
 redis/
+mongodb/
