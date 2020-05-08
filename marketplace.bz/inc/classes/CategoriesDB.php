@@ -10,7 +10,7 @@
 		public static function getCategories(){
 			$ret = "";
 			//https://www.a2hosting.com/kb/developer-corner/postgresql/connect-to-postgresql-using-php
-			$db_connection = pg_connect("host=localhost port=5433 dbname=postgres user=Admin password=master69key420");
+			$db_connection = pg_connect("host=localhost port=5432 dbname=postgres user=Admin password=master69key420");
 			//$result = pg_query($db_connection, "SELECT lastname FROM employees");
 
 			$stat = pg_connection_status($db_connection);
@@ -23,7 +23,7 @@
 		}
 
 		public static function storepassword(){
-			$db_connection = pg_connect("host=localhost port=5433 dbname=postgres user=Admin password=master69key420");
+			$db_connection = pg_connect("host=localhost port=5432 dbname=postgres user=Admin password=master69key420");
 			
 			$stuser = $dbh->prepare("INSERT INTO Muser(username, email, name, passwordhash) VALUES (:username, :email, :name, :passwordhash)");
 

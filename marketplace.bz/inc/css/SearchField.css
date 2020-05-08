@@ -1,0 +1,14 @@
+.form-control:focus {
+    box-shadow: none;
+}
+
+.form-control-underlined {
+    border-width: 0;
+    border-bottom: 1px solid #CED4DA;
+    border-radius: 0;
+    padding-left: 0;
+}
+.form-control-underlined:focus {
+    border-bottom: 1px solid #4285F4;
+    box-shadow: 0 1px 0 0 #4285F4;
+}
