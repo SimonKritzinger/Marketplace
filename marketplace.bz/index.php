@@ -27,13 +27,12 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
         <!--  <link rel="stylesheet" href="inc/css/mycss.css">   -->
     <link rel="stylesheet" href="inc/css/stylesheet.css">
     <link rel="stylesheet" href="inc/css/zoom.css">
+        <link rel="stylesheet" href="inc/css/SideBar.css">
+
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script src="inc/js/zoom.js"></script>
 
@@ -54,29 +53,31 @@
 	</head>
 	<body>
 		<?php require_once("scripts/scr.Header.php"); ?>
-    <br><br>
-    <div class="pure-g">
-      <div class="pure-u-1-5">
-        <?php require_once("scripts/scr.CategoryList.php"); ?>
-      </div>
-      <div class="pure-u-3-5">
-        <?php
-          if(empty($_REQUEST["id"])){
-            require_once("scripts/scr.PostList.php");
-          }elseif($_REQUEST["id"] == 1){
-            require_once("scripts/scr.Post.php");
-          }
-        ?>
-      </div>
-      <div class="pure-u-1-5">
-        <?php require_once("scripts/scr.Advertisement.php"); ?>
-      </div>
+    <div class="container-fluid pl-0">
+        <div class="row">
+
+            <div class="col-md-2 d-none d-md-block" style="position: fixed; z-index: 1" id="sidebar">
+                <?php require_once("scripts/scr.CategoryList.php"); ?>
+            </div>
+
+            <div class="col-md-8 col-sm-12 ml-sm-auto">
+                <?php
+                  if(empty($_REQUEST["id"])){
+                    require_once("scripts/scr.PostList.php");
+                  }elseif($_REQUEST["id"] == 1){
+                    require_once("scripts/scr.Post.php");
+                  }
+                ?>
+
+                <?php require_once("scripts/scr.Footer.php"); ?>
+            </div>
+
+            <div class="col-md-2 d-none d-md-block">
+            <?php require_once("scripts/scr.Advertisement.php"); ?>
+            </div>
+        </div>
     </div>
-    <?php require_once("scripts/scr.Footer.php"); ?>
 
-
-
-	?>
     <?php
       if(10 == 45){
   			if(empty($_REQUEST["id"])){
@@ -131,5 +132,10 @@
   			}
       }
 		?>
-	</body>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    </body>
 </html>
