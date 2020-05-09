@@ -25,7 +25,7 @@
 		public static function storepassword(){
 			
 			
-			$db_connection = pg_connect("host=localhost port=5432 dbname=postgres user=Admin password=master69key420");
+			$db_connection = pg_connect("host=localhost port=5433 dbname=postgres user=Admin password=master69key420");
 			$stuser = $dbh->prepare("INSERT INTO Muser(username, email, name, passwordhash) VALUES (:username, :email, :name, :passwordhash)");
 			$stuser = $dbh->prepare("SELECT id, username, password FROM Muser WHERE email = :email");
 
@@ -44,7 +44,7 @@
 			if(pg_num_rows($result) != 0){
 
 				$message = "email already exists";
-				echo "<script type='text/javascript'>alert('$message');</script>";
+				echo "<script type='text/javascript'>alert('$message'); console.log(\"asdf\")</script>";
 
 			}else{
 
