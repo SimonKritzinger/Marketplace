@@ -55,11 +55,11 @@
     <div class="container-fluid pl-0">
         <div class="row">
 
-            <div class="col-md-2 d-none d-md-block" style="position: fixed" id="sidebar">
+            <div class="col-md-2 d-none d-md-block" style="position: fixed; z-index: 1" id="sidebar">
                 <?php require_once("scripts/scr.CategoryList.php"); ?>
             </div>
 
-            <div class="col-md-8 col-sm-12 ml-sm-auto" style="z-index: -100">
+            <div class="col-md-8 col-sm-12 ml-sm-auto">
                 <?php
                   if(empty($_REQUEST["id"])){
                     require_once("scripts/scr.PostList.php");
