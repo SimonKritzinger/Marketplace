@@ -39,7 +39,7 @@
             <a href="#" class="nav-item nav-link">Login</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-item nav-link">Register</a>
+            <a href="inc/classes/Register.php" class="nav-item nav-link">Register</a>
           </li>
             <?php }?>
         </ul>

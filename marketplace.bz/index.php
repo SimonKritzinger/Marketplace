@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
 	<?php
-		require_once "inc/classes/Categories.php";
+	require_once "inc/classes/Categories.php";
     require_once "inc/classes/CategoriesDB.php";
-		require_once "inc/classes/Comments.php";
+	require_once "inc/classes/Comments.php";
     require_once "inc/classes/CommentsDB.php";
     require_once "inc/classes/Images.php";
     require_once "inc/classes/ImagesDB.php";
     require_once "inc/classes/Post.php";
     require_once "inc/classes/PostDB.php";
     require_once "inc/classes/User.php";
-    require_once "inc/classes/UserDB.php";
+	require_once "inc/classes/UserDB.php";
 		session_start();
 	?>
 
