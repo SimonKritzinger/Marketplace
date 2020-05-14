@@ -32,3 +32,14 @@
     border: none;
     color: #AECFE5;
 }
+
+/* Lukas: posts things */
+.blue-box {
+  background-color:#008CD8;
+  color:white;
+  padding-left:0.5rem;
+  padding-right:0.5rem;
+}
+.centered-content {
+  margin:auto;
+}
