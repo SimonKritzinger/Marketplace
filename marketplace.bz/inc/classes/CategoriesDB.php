@@ -78,31 +78,39 @@
 
 		public static function loginuser(){
 	
-			$db_connection = pg_connect("host=localhost port=5433 dbname=postgres user=Admin password=master69key420");
-			$stuser = $dbh->prepare("SELECT id, username, password FROM Muser WHERE email = :email");
-
-			$hpassword = password_hash($password, PASSWORD_DEFAULT);
-			$email = $_POST['lemail'];
+			$db_connection = pg_pconnect("host=localhost port=5433 dbname=Marketplace user=Admin password=master69key420");
+			
+			$sql = 'SELECT userid, username, passwordhash FROM muser WHERE email = $1';
+			$loginUser ='loginUser';
+			
+			$lemail = $_POST['lemail'];
 			$lpassword = $_POST['lpassword'];
 
-			$stuser->bindParam(':email', $email);
-		
-			$result = pg_query($db_connection, $stuser);
+			if(!pg_prepare ($sqlName, $sql)){
+				echo'error';	
+			}
 
-			if(pg_num_rows($result) != 0){
-				$id = pg_fetch_result($result, 0, 0);
-				$username = pg_fetch_result($result, 0, 1);
-				$password = pg_fetch_result($result, 0, 2);
+			$rs = pg_execute($loginUser, array($lemail));
+			
+			$rows = pg_num_rows($rs);
 
-				if(password_verify($passowrd, $lpassword)){
-					
-					$_SESSION["id"] = $id;
-					$_SESSION["lusername"] = $username;
+			
+			if($rows == 0){
+
+				
+			}else{
+
+				$row = pg_fetch_row($rs);
+				$pw = $row[2];
+
+				if(password_verify($lpassword, $pw) == TRUE){
+					 
+					$userid= $row[0];
+					$logedinuser= $row[1];
 
 				}else{
 
-					$message = "worng password";
-					echo "<script type='text/javascript'>alert('$message');</script>";
+
 				}
 
 			}
@@ -117,6 +125,7 @@
 			$post = $_POST['password'];
 			$picutres = $_POST['name'];
 		}
-	}
 
+		
+	}
  ?>

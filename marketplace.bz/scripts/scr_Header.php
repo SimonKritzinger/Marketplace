@@ -1,5 +1,7 @@
 <link rel="stylesheet" href="../inc/css/NavBar.css">
 
+
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top navbar-bottom-border">
     <button class="navbar-toggler" type="button" onclick="sidebarTogglerClick()" id="sidebarToggler" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -36,7 +38,7 @@
           else{
            ?>
           <li class="nav-item">
-            <a href="#" class="nav-item nav-link">Login</a>
+            <a href="#" class="nav-item nav-link" data-toggle="modal" data-target="#LoginForm">Login</a>
           </li>
           <li class="nav-item">
             <a href="inc/classes/Register.php" class="nav-item nav-link">Register</a>
@@ -45,6 +47,39 @@
         </ul>
     </div>
 </nav>
+
+<div class="modal fade" id="LoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <i class="fas fa-envelope prefix grey-text"></i>
+          <input type="email"  class="form-control validate" name="lemail">
+          <label data-error="wrong" data-success="right" for="defaultForm-email">Your email</label>
+        </div>
+
+        <div class="md-form mb-4">
+          <i class="fas fa-lock prefix grey-text"></i>
+          <input type="password"  class="form-control validate" name="lpassword">
+          <label data-error="wrong" data-success="right" for="defaultForm-pass">Your password</label>
+        </div>
+
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button class="btn btn-default" name="loginbutton" onclick="Login()" >Login</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 <script>
 
@@ -58,3 +93,25 @@
     };
 
 </script>
+
+<script>
+    function Login(){
+			<?php
+      
+      //if(isset($lemail) && isset($lpassword)){
+        //console.log("message here");
+        
+
+      //}else{
+
+      //include "\classes\Categories.DB";
+      $test = new CategoriesDB();
+      $test->loginuser();
+      //}
+      
+			?>
+
+		};
+</script>
+
+

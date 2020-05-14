@@ -43,7 +43,7 @@
 			$test = new CategoriesDB();
 			?>
 
-			alert("<?php echo $test->getCategories(); ?>")
+			alert("<?php echo $test->getCategories(); ?>");
 
 		};
 		</script>
@@ -52,7 +52,7 @@
     </style>
 	</head>
 	<body>
-		<?php require_once("scripts/scr.Header.php"); ?>
+		<?php require_once("scripts/scr_Header.php"); ?>
     <div class="container-fluid pl-0">
         <div class="row">
 
