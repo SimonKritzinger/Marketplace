@@ -1,7 +1,6 @@
 <link rel="stylesheet" href="../inc/css/NavBar.css">
 
 
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top navbar-bottom-border">
     <button class="navbar-toggler" type="button" onclick="sidebarTogglerClick()" id="sidebarToggler" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -41,15 +40,16 @@
             <a href="#" class="nav-item nav-link" data-toggle="modal" data-target="#LoginForm">Login</a>
           </li>
           <li class="nav-item">
-            <a href="inc/classes/Register.php" class="nav-item nav-link">Register</a>
+            <a href="#" class="nav-item nav-link" data-toggle="modal" data-target="#RegisterForm">Register</a>
           </li>
             <?php }?>
         </ul>
     </div>
 </nav>
 
-<div class="modal fade" id="LoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
+
+
+<div class="modal fade" id="LoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
@@ -73,13 +73,70 @@
 
       </div>
       <div class="modal-footer d-flex justify-content-center">
-        <button class="btn btn-default" name="loginbutton" onclick="Login()" >Login</button>
+        <button class="btn btn-default" name="loginbutton" onclick="LoginUser()" >Login</button>
       </div>
     </div>
   </div>
 </div>
 
+<!-- <form data-toggle="validator" role="form" method="post"  > -->
+<div class="modal fade" id="RegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Register</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <i class="fas fa-envelope prefix grey-text"></i>
+          <input type="email"  class="form-control validate" name="remail" placeholder="Enter email" id="remailid" required>
+          <label data-error="wrong" data-success="right" for="defaultForm-email" >Your email</label>
+        </div>
 
+        <div class="md-form mb-4">
+          <i class="fas fa-lock prefix grey-text"></i>
+          <input type="text"  class="form-control validate" name="rname" id="rnameid" placeholder="Enter name" required>
+          <label >Your name</label>
+        </div>
+        
+        <div class="md-form mb-4">
+          <i class="fas fa-lock prefix grey-text"></i>
+          <input type="text"  class="form-control validate" name="runame" id="runameid" placeholder="Enter username" required>
+          <label >Your username</label>
+        </div>
+
+        <div class="md-form mb-4">
+          <i class="fas fa-lock prefix grey-text"></i>
+          <input type="password"  class="form-control validate" name="rpassword" id="rpasswordid" placeholder="Enter password"required>
+          <label data-error="wrong" data-success="right" for="defaultForm-pass">Your password</label>
+        </div>
+
+        <div class="alert alert-danger collapse" role="alert" id="Registeremailalert">
+          <strong>Please insert missing Data</strong> 
+          <button type="button" class="close" id="healert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+
+      </div>
+      <div class="modal-footer d-flex justify-content-center form-group">
+        <button type="submit" class="btn btn-primary" name="loginbutton"  onclick="javascript:Register()">Register</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- </form> -->
+
+<script>
+// to be deleted after test inculding register...
+$("#healert").click(function(){
+        $("#Registeremailalert").toggle();
+    });
+</script>
 
 <script>
 
@@ -94,24 +151,6 @@
 
 </script>
 
-<script>
-    function Login(){
-			<?php
-      
-      //if(isset($lemail) && isset($lpassword)){
-        //console.log("message here");
-        
 
-      //}else{
-
-      //include "\classes\Categories.DB";
-      $test = new CategoriesDB();
-      $test->loginuser();
-      //}
-      
-			?>
-
-		};
-</script>
 
 

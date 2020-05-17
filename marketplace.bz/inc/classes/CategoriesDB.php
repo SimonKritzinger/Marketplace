@@ -22,7 +22,7 @@
 			pg_close($db_connection);
 		}
 
-		public static function storepassword(){
+		public static function registeruser(){
 			
 			$db_connection = pg_pconnect("host=localhost port=5433 dbname=Marketplace user=Admin password=master69key420");
 			$sql = 'INSERT INTO muser(username, email, name, passwordhash) VALUES ($1, $2, $3, $4)';
