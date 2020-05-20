@@ -38,18 +38,3 @@ function Register(){
 
     return false;
 }
-
-/*
-function GetAllPosts(){
-  $.ajax({
-    type:'GET',
-    url:'inc/classes/PostDB.php',
-    data:{
-
-    },
-    success:function(data){
-
-    }
-  });
-}
-*/
