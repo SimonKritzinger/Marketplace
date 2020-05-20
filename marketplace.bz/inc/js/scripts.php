@@ -1,7 +1,10 @@
 <script>
-  function myFunction(){
-    <?php $test = new CategoriesDB(); ?>
-    alert("<?php echo $test->getCategories(); ?>")
+  function getConnection(){
+    <?php
+      require_once 'inc/classes/Functions.php';
+      $test = new Functions();
+    ?>
+    alert("<?php echo $test->getConnectionStatus(); ?>")
   };
 
   $(document).ready(function(){
@@ -9,7 +12,3 @@
   });
 
 </script>
-
-
-
-

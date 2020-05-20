@@ -1,18 +1,6 @@
 <!DOCTYPE html>
 <html>
-	<?php
-		session_start();
-		require_once "inc/classes/Categories.php";
-    require_once "inc/classes/CategoriesDB.php";
-    require_once "inc/classes/Images.php";
-    require_once "inc/classes/ImagesDB.php";
-    require_once "inc/classes/Post.php";
-    require_once "inc/classes/PostDB.php";
-    require_once "inc/classes/User.php";
-		require_once "inc/classes/UserDB.php";
-	?>
-
-
+	<?php session_start(); ?>
 	<head>
     <meta charset="UTF-8">
     <meta name="description" content="Project Marketplace">
@@ -33,7 +21,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script src="inc/js/zoom.js"></script>
 		<?php require_once "inc/js/scripts.php"; ?>
-    <script src="/scripts/Scripts.js"></script>
+    <script src="inc/js/Scripts.js"></script>
 		<style>
     </style>
 	</head>
@@ -46,7 +34,7 @@
         </div>
         <div class="col-md-8 col-sm-12 ml-sm-auto">
 					<br><br>
-				  <form method="post"><input id="button" type="submit" onclick="myFunction()"></a></form>
+				  <form method="post"><input id="button" type="submit" onclick="getConnection()"></a></form>
         	<?php require_once("scripts/scr.PostList.php"); ?>
         	<?php require_once("scripts/scr.Footer.php"); ?>
         </div>
