@@ -31,11 +31,46 @@ function Register(){
                window.location.href="index.php"; 
             }
            }
-            
-        
-     }
+        }
       });
     }
+}
+
+function Login(){
+
+  var email = document.getElementById("lemailid").value;
+  var pass= document.getElementById("lpasswordid").value;
   
-    return false;
-    }
+  
+  if(pass=="" || email=="" ){
+
+    $("#Registeremailalert").show();
+
+  }else{
+    
+    $.ajax
+    ({
+      type:'POST',
+      url:'inc/classes/Login.php',
+      data:{
+      email:email,
+      password:pass,
+      },
+  
+      success:function(data){
+         if(data){
+          var result = JSON.parse(data);
+          alert(result.message);
+
+          if(result.message =="Login completed"){
+            $('#LoginForm').modal('hide');
+            var x = document.getElementById("lbutton").style.display='none';
+            var x = document.getElementById("rbutton").style.display='none';
+            
+
+          }
+         }
+      }
+    });
+  }
+}

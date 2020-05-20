@@ -13,7 +13,6 @@
             $rs = pg_query_params($db_connection, $emailalreadyexists, array($email));
             $row = pg_num_rows ($rs); 
           
-           
             if($row  == 0){
 
                 $rs = pg_query_params($db_connection, $usernamealreadyexists, array($username));
@@ -23,7 +22,7 @@
 
                     $rs = pg_query_params($db_connection, $sql, array($username, $email, $name, $hpassword));
 
-                     if( pg_affected_rows($rs) != 0){
+                     if(pg_affected_rows($rs) != 0){
 
                         $return = array("message"=>"Registration complete");
                         echo json_encode($return);
@@ -48,8 +47,6 @@
 			
         exit();
 
-        
-            
         ?>
 			
 			

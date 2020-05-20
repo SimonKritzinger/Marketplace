@@ -37,10 +37,10 @@
           else{
            ?>
           <li class="nav-item">
-            <a href="#" class="nav-item nav-link" data-toggle="modal" data-target="#LoginForm">Login</a>
+            <a href="#" class="nav-item nav-link" data-toggle="modal" data-target="#LoginForm" id="lbutton">Login</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-item nav-link" data-toggle="modal" data-target="#RegisterForm">Register</a>
+            <a href="#" class="nav-item nav-link" data-toggle="modal" data-target="#RegisterForm" id="rbutton">Register</a>
           </li>
             <?php }?>
         </ul>
@@ -61,25 +61,25 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <i class="fas fa-envelope prefix grey-text"></i>
-          <input type="email"  class="form-control validate" name="lemail">
-          <label data-error="wrong" data-success="right" for="defaultForm-email">Your email</label>
+          <input type="email"  class="form-control validate" name="lemail" id="lemailid">
+          <label data-error="wrong" data-success="right" for="defaultForm-email" required>Your email</label>
         </div>
 
         <div class="md-form mb-4">
           <i class="fas fa-lock prefix grey-text"></i>
-          <input type="password"  class="form-control validate" name="lpassword">
-          <label data-error="wrong" data-success="right" for="defaultForm-pass">Your password</label>
+          <input type="password"  class="form-control validate" name="lpassword" id="lpasswordid">
+          <label data-error="wrong" data-success="right" for="defaultForm-pass" required>Your password</label>
         </div>
 
       </div>
       <div class="modal-footer d-flex justify-content-center">
-        <button class="btn btn-default" name="loginbutton" onclick="LoginUser()" >Login</button>
+      <button type="submit" class="btn btn-primary" name="loginbutton"  onclick="javascript:Login()" >Login</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- <form data-toggle="validator" role="form" method="post"  > -->
+
 <div class="modal fade" id="RegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -124,15 +124,15 @@
 
       </div>
       <div class="modal-footer d-flex justify-content-center form-group">
-        <button type="submit" class="btn btn-primary" name="loginbutton"  onclick="javascript:Register()">Register</button>
+        <button type="submit" class="btn btn-primary" name="loginbutton"  onclick="javascript:Register()" >Register</button>
       </div>
     </div>
   </div>
 </div>
-<!-- </form> -->
+
 
 <script>
-// to be deleted after test inculding register...
+
 $("#healert").click(function(){
         $("#Registeremailalert").toggle();
     });
