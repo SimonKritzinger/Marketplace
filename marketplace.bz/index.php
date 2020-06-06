@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-	<?php session_start(); ?>
 	<head>
     <meta charset="UTF-8">
     <meta name="description" content="Project Marketplace">
@@ -22,10 +21,35 @@
 		<script src="inc/js/zoom.js"></script>
 		<?php require_once "inc/js/scripts.php"; ?>
     <script src="inc/js/Scripts.js"></script>
+    <script> 
+    function Checkifloggedin(){
+
+      $.ajax
+      ({
+      type:'POST',
+      url:'inc/classes/logincheck.php',
+  
+      success:function(data){
+         if(data){
+          var result = JSON.parse(data);
+          
+          if(result.message =="already logged in"){
+            $('#LoginForm').modal('hide');
+            document.getElementById("lbutton").style.display='none';
+            document.getElementById("rbutton").style.display='none';
+            document.getElementById("hpostbutton").style.display='block';
+            document.getElementById("hlogoffbutton").style.display='block';
+          }
+         }
+      }
+      });
+    }
+      
+    </script>
 		<style>
     </style>
 	</head>
-	<body>
+	<body onload="Checkifloggedin()">
 		<?php require_once("scripts/scr_Header.php"); ?>
     <div class="container-fluid pl-0">
       <div class="row">

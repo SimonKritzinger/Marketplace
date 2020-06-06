@@ -42,15 +42,80 @@
           <li class="nav-item">
             <a href="#" class="nav-item nav-link" data-toggle="modal" data-target="#RegisterForm" id="rbutton">Register</a>
           </li>
+          <li class="nav-item" id="hpostbutton" style="display: none">
+            <a href="#" class="nav-item nav-link" data-toggle="modal" data-target="#CreatePostForm" id="cbutton" >Create Post</a>
+          </li>
+          <li class="nav-item" id="hlogoffbutton" style="display: none">
+            <button type="button"  class="nav-item nav-link btn btn-info"  id="logoffbutton" onclick="javascript:LogOut()" >Logout</button>
+            <!--<button href="#"   data-target="" >Log Off</a> -->
+          </li>
             <?php }?>
         </ul>
     </div>
 </nav>
 
 
+<div class="modal" tabindex="-1" role="dialog" id="CreatePostForm" > 
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Create a Post</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="col-md-16">
+          <form method="post" action="/inc/classes/file_upload.php" enctype="multipart/form-data" id="upload_form">
+
+                <div class="form-group">
+                  <label for="form-group">Titel </label>
+                  <input type="text" class="form-control" id="PTitel" name="titel" placeholder="Input your Titel" size="40" required>
+                </div>
+                <div class="form-group">
+                  <label for="form-group">Description</label>
+                  <textarea class="form-control" id="PDescritpion" name="description" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="form-group">Contact Information</label>
+                  <textarea class="form-control" id="PCInfos" rows="3" name="contactinfo" required></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="form-group">Select Category</label>
+                  <select class="form-control" id="exampleFormControlSelect1" name="category">
+                    <option>Books</option>
+                    <option>Entertainment</option>
+                    <option>Electronic</option>
+                    <option>Videogames</option>
+                    <option>Games</option>
+                    <option>House</option>
+                    <option>Garden</option>
+                    <option>Health and Care</option>
+                    <option>Clothing</option>
+                    <option>Sport</option>
+                    <option>Vehicle</option>
+                    <option>Office</option>
+                    <option>Services</option>
+                  </select>
+                </div>
+                <div class="form-group files">
+                  <label>Upload  Image </label>
+                  <input type="file" name="files[]"  class="form-control" single required>
+                </div>
+                <div>
+                <button type="button"  class="btn btn-primary" id="button_upload" onclick="javascript:CreatePost()">Create Post</button>
+                </div>
+               
+          </form>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
 
 <div class="modal fade" id="LoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
         <h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
@@ -81,7 +146,7 @@
 
 
 <div class="modal fade" id="RegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
         <h4 class="modal-title w-100 font-weight-bold">Register</h4>

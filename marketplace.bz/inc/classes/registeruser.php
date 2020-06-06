@@ -1,5 +1,5 @@
         <?PHP
-            
+             
             $db_connection = pg_pconnect("host=localhost port=5433 dbname=Marketplace user=Admin password=master69key420");
             $emailalreadyexists = "SELECT email FROM MUser where muser.email = $1";
             $sql = 'INSERT INTO muser(username, email, name, passwordhash) VALUES ($1, $2, $3, $4)';

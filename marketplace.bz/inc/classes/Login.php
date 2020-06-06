@@ -1,4 +1,5 @@
 <?PHP
+    session_start();
     $db_connection = pg_pconnect("host=localhost port=5433 dbname=Marketplace user=Admin password=master69key420");
     $emailexist ="SELECT email, passwordhash, userid, username  FROM MUser where muser.email = $1";
 
@@ -13,19 +14,26 @@
 
         $return = array("message"=>"Sorry we could not find a user for this Email");
         echo json_encode($return);
-
+        
     }else{
 
         $pw1 = $rw[1];
 
         if(password_verify ($password, $pw1)){
-
-        $return = array("message"=>"Login completed", "email"=> $rw[0], "userid"=> $rw[2], "username"=>$rw[3]);
+        
+        $return = array("message"=>"Login completed");
         echo json_encode($return);
-
+        
+        
+        $_SESSION["login"]="OK";
+        $_SESSION["username"]= $rw[3];
+        $_SESSION["userid"]= $rw[2];
+        $_SESSION["email"]= $rw[0];
+         
         }else{
             
             $return = array("message"=>"Wrong password");
+            echo json_encode($return);
         } 
     }
 ?>

@@ -65,14 +65,62 @@ if(pass=="" || email=="" ){
 
         if(result.message =="Login completed"){
           $('#LoginForm').modal('hide');
-          var x = document.getElementById("lbutton").style.display='none';
-          var x = document.getElementById("rbutton").style.display='none';
-          
-
+          document.getElementById("lbutton").style.display='none';
+          document.getElementById("rbutton").style.display='none';
+          document.getElementById("hpostbutton").style.display='block';
+          document.getElementById("hlogoffbutton").style.display='block';
         }
        }
     }
   });
-}
+ }
 }
 
+function CreatePost(){
+
+  var formData = new FormData($('#upload_form')[0]);
+  
+    $.ajax
+    ({
+      type:'POST',
+      enctype: 'multipart/form-data',
+      url:'inc/classes/createpost.php',
+      data:formData,
+      contentType: false,
+      processData: false,
+      cache: false,
+      success:function(data){
+         if(data){
+          var result = JSON.parse(data);
+          alert(result.message);
+
+          if(result.message =="Post was created"){
+            window.location.href="index.php";
+          }
+         }
+      }
+    });
+  
+}
+
+function LogOut(){
+    
+    $.ajax
+    ({
+      type:'POST',
+      url:'inc/classes/logoff.php',
+
+      success:function(data){
+         if(data){
+          var result = JSON.parse(data);
+          alert(result.message);
+
+          if(result.message =="Logout completed"){
+            
+            window.location.href="index.php";
+          }
+         }
+      }
+    });
+  
+}
