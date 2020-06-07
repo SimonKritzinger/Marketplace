@@ -23,7 +23,7 @@
         echo "An Error occured while trying to connect to the Database.\n";
         exit;
       }else{
-        $sql = "SELECT * FROM post;";
+        $sql = "SELECT * FROM post join muser on muser.userid = post.userid;";
         $result = pg_query($db_connection,$sql);
         if(!$result){
           echo "An Error occured while trying to query the Database.\n";
@@ -39,6 +39,7 @@
               $titel = $row[3];
               $description = $row[4];
               $images = $row[5];
+              $email = $row[9];
               ?>
 
               <div class="col-md-4">
@@ -72,7 +73,7 @@
                       <?php echo $description ?>
                     </div>
                     <div class="modal-footer">
-                      <small class="text-muted" style="font-size:18px;margin:auto">Contact: ThisIsYourEmail@gmail.com</small>
+                      <small class="text-muted" style="font-size:18px;margin:auto">Contact: <?php echo $email ?></small>
                     </div>
                   </div>
                 </div>
