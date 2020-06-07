@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="../inc/css/NavBar.css">
 
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top navbar-bottom-border">
     <button class="navbar-toggler" type="button" onclick="sidebarTogglerClick()" id="sidebarToggler" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -9,7 +8,6 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <div class="navbar-nav mx-auto">
                 <form class="form-inline my-2 my-lg-0 w-70">
@@ -21,7 +19,6 @@
                     </div>
                 </form>
         </div>
-
         <ul class="navbar-nav">
           <li class="nav-item">
             <a href="#" class="nav-item nav-link" data-toggle="modal" data-target="#LoginForm" id="lbutton">Login</a>
@@ -34,12 +31,10 @@
           </li>
           <li class="nav-item" id="hlogoffbutton" style="display: none">
             <button type="button"  class="nav-item nav-link btn btn-info"  id="logoffbutton" onclick="javascript:LogOut()" >Logout</button>
-          </li>
-            
+          </li> 
         </ul>
     </div>
 </nav>
-
 
 <div class="modal" tabindex="-1" role="dialog" id="CreatePostForm" > 
   <div class="modal-dialog modal-lg" role="document">
@@ -53,7 +48,6 @@
       <div class="modal-body">
         <div class="col-md-16">
           <form method="post" action="/inc/classes/file_upload.php" enctype="multipart/form-data" id="upload_form">
-
                 <div class="form-group">
                   <label for="form-group">Titel </label>
                   <input type="text" class="form-control" id="PTitel" name="titel" placeholder="Input your Titel" size="40" required>
@@ -91,7 +85,6 @@
                 <div>
                 <button type="button"  class="btn btn-primary" id="button_upload" onclick="javascript:CreatePost()">Create Post</button>
                 </div>
-               
           </form>
         </div>
       </div>
@@ -129,7 +122,6 @@
     </div>
   </div>
 </div>
-
 
 <div class="modal fade" id="RegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
@@ -171,8 +163,6 @@
               <span aria-hidden="true">&times;</span>
           </button>
         </div>
-
-
       </div>
       <div class="modal-footer d-flex justify-content-center form-group">
         <button type="submit" class="btn btn-primary" name="loginbutton"  onclick="javascript:Register()" >Register</button>
@@ -181,16 +171,13 @@
   </div>
 </div>
 
-
 <script>
-
 $("#healert").click(function(){
         $("#Registeremailalert").toggle();
     });
 </script>
 
 <script>
-
     function sidebarTogglerClick() {
         console.log("sers")
         // open or close navbar
@@ -199,7 +186,6 @@ $("#healert").click(function(){
 
         $('#sidebar[aria-expanded=true]').attr('aria-expanded', 'false');
     };
-
 </script>
 
 

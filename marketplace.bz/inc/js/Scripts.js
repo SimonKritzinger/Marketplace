@@ -122,5 +122,4 @@ function LogOut(){
          }
       }
     });
-  
 }

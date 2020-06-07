@@ -2,7 +2,6 @@
     session_start();
     $db_connection = pg_pconnect("host=localhost port=5433 dbname=Marketplace user=Admin password=master69key420");
     $emailexist ="SELECT email, passwordhash, userid, username  FROM MUser where muser.email = $1";
-
     $password = $_POST['password'];
     $email = $_POST['email'];
 
@@ -23,7 +22,6 @@
         
         $return = array("message"=>"Login completed");
         echo json_encode($return);
-        
         
         $_SESSION["login"]="OK";
         $_SESSION["username"]= $rw[3];

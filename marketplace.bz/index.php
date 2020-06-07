@@ -23,7 +23,6 @@
     <script src="inc/js/Scripts.js"></script>
     <script> 
     function Checkifloggedin(){
-
       $.ajax
       ({
       type:'POST',
@@ -44,7 +43,6 @@
       }
       });
     }
-      
     </script>
 		<style>
     </style>
