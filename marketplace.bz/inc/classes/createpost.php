@@ -30,7 +30,7 @@
                     
                 if(file_exists($filepath)) { 
                     $filepath = $upload_dir.time().$file_name;
-                    $file_name = $file_name.time();
+                    $file_name = time().$file_name;
                       
                     if(move_uploaded_file($file_tmpname, $filepath)) { 
                        $stboolean = true;
