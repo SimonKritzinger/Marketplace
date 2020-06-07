@@ -44,8 +44,7 @@
      
                 } 
 
-            } 
-            else { 
+            }else { 
                   
                 // If file extention not valid
                 $return5 = array("message"=> '{$file_ext} file type is not allowed');          
@@ -77,13 +76,6 @@
         echo json_encode($return6);
         }
         
-
-        
-
-        
-       
-
-        //$return = array("message"=> $name);
-        //echo json_encode($return);
-        
+        pg_close($db_connection);
+        exit();   
 ?> 

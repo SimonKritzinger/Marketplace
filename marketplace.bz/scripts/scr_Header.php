@@ -23,19 +23,6 @@
         </div>
 
         <ul class="navbar-nav">
-          <?php
-          if(!empty($_SESSION["user"]))
-          {?>
-          <li class="nav-item">
-            <a href="#" class="nav-item nav-link"><?php echo $_SESSION["user"].username?>></a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-item nav-link">Logoff</a>
-          </li>
-           <?php
-          }
-          else{
-           ?>
           <li class="nav-item">
             <a href="#" class="nav-item nav-link" data-toggle="modal" data-target="#LoginForm" id="lbutton">Login</a>
           </li>
@@ -47,9 +34,8 @@
           </li>
           <li class="nav-item" id="hlogoffbutton" style="display: none">
             <button type="button"  class="nav-item nav-link btn btn-info"  id="logoffbutton" onclick="javascript:LogOut()" >Logout</button>
-            <!--<button href="#"   data-target="" >Log Off</a> -->
           </li>
-            <?php }?>
+            
         </ul>
     </div>
 </nav>
