@@ -123,3 +123,92 @@ function LogOut(){
       }
     });
 }
+
+function UpdatePost(userinput){
+
+  
+  var searchtext = document.getElementById("Searchfield").value;
+  
+  if(!searchtext && userinput == "Search"){
+
+    alert("Please enter something to search for");
+    
+  }else{
+    document.getElementById("Post").innerHTML="";
+    $.ajax
+  ({
+    
+    type:'POST',
+    url:'inc/classes/updatepost.php',
+    async: false,
+    data:{
+    input:userinput,
+    searchinput:searchtext,
+    },
+
+    success:function(data){
+
+      var postdiv = document.getElementById("Post");
+      var result = JSON.parse(data);
+
+      if(result.hasOwnProperty('message')){
+
+        alert(result.message);
+
+      }else{
+
+        result.forEach(function(item){
+          
+          var postid = item.postid;
+          var category = item.category;
+          var titel = item.titel;
+          var description = item.description;
+          var images = item.primaryimage;
+          var email = item.email;
+        
+         
+        $('#Post').append('<div class="col-md-4">' +
+              '<div class="card mb-4 box-shadow" data-toggle="modal" data-target="#'+ postid +' ">'+
+                '<img class="card-img-top" alt="'+images + '" style="height:225px;width:100%;display:block;"'+
+                'src="inc/images/' +images+ '" data-holder-rendered="true">'+
+                '<hr style="margin-top:0rem;margin-bottom:0rem;">'+
+                '<div class="card-body">'+
+                  '<div class="d-flex justify-content-between align-items-center">'+
+                    '<small class="text-muted" style="font-size:18px">' +titel+ '</small>'+
+                    '<span class="border border-primary rounded blue-box">' +category + '</span>'+
+                  '</div>'+
+                '</div>'+
+              '</div>'+
+            '</div>'+
+            '<div class="modal fade" id="'+postid+ '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">'+
+              '<div class="modal-dialog" role="document" style="max-width:800px">'+
+                '<div class="modal-content">'+
+                  '<div class="modal-header">'+
+                    '<h5 class="modal-title" id="exampleModalLongTitle" style="margin:auto">' +titel +'</h5>'+
+                    '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'+
+                      '<span aria-hidden="true">&times;</span>'+
+                    '</button>'+
+                  '</div>'+
+                  '<div class="modal-body">'+
+                    '<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="'+images +'" style="height:225px;width:225px;display:block;"'+
+                    'src="inc/images/'+ images +'" data-holder-rendered="true">'+
+                    '<hr style="margin-top:0rem;margin-bottom:0rem;">'+
+                    description+
+                  '</div>'+
+                  '<div class="modal-footer">'+
+                    '<small class="text-muted" style="font-size:18px;margin:auto">Contact:' +email +'</small>'+
+                  '</div>'+
+                '</div>'+
+              '</div>'+
+            '</div>')
+          
+        });
+
+      }
+        
+    }
+  });
+  } 
+   
+ 
+}

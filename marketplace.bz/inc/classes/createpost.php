@@ -2,7 +2,6 @@
         session_start();
         $pdescription = $_POST['description'];
         $titel = $_POST['titel'];
-        $contactinfo = $_POST['contactinfo'];
         $category = $_POST['category'];
 
         $upload_dir = "C:\Wamp.NET\sites\marketplace.bz\inc\images".DIRECTORY_SEPARATOR;

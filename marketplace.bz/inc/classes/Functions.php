@@ -19,11 +19,14 @@
 
     public function getAllPosts(){
       $db_connection = pg_pconnect("host=localhost port=5433 dbname=Marketplace user=Admin password=master69key420");
+      
       if(!$db_connection){
         echo "An Error occured while trying to connect to the Database.\n";
         exit;
       }else{
-        $sql = "SELECT * FROM post join muser on muser.userid = post.userid;";
+          $sql = "SELECT * FROM post join muser on muser.userid = post.userid ORDER BY creationtime DESC;";
+        }
+    
         $result = pg_query($db_connection,$sql);
         if(!$result){
           echo "An Error occured while trying to query the Database.\n";
@@ -51,7 +54,7 @@
                     <!--<p class="card-text"></p>-->
                     <div class="d-flex justify-content-between align-items-center">
                       <small class="text-muted" style="font-size:18px"><?php echo $titel ?></small>
-                      <span class="border border-primary rounded blue-box"><?php echo $category ?></span>
+                      <medium class="border border-primary rounded blue-box"><?php echo $category ?></medium>
                     </div>
                   </div>
                 </div>
@@ -86,6 +89,5 @@
       }
     }
 
-  }
-
+    pg_close($db_connection);
  ?>

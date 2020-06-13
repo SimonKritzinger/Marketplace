@@ -3,43 +3,43 @@
         <ul class="navbar-nav flex-column">
 
             <li class="nav-item">
-                <a href="?cat=0" class="nav-item nav-link categories">Books</a>
+                <a href="#" class="nav-item nav-link categories" onclick="javascript:UpdatePost('Books')">Books</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-item nav-link categories">Entertainment</a>
+                <a href="#" class="nav-item nav-link categories" onclick="javascript:UpdatePost('Entertainment')">Entertainment</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-item nav-link categories">Electronic</a>
+                <a href="#" class="nav-item nav-link categories" onclick="javascript:UpdatePost('Electronic')">Electronic</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-item nav-link categories">Videogames</a>
+                <a href="#" class="nav-item nav-link categories" onclick="javascript:UpdatePost('Videogames')">Videogames</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-item nav-link categories">Games</a>
+                <a href="#" class="nav-item nav-link categories" onclick="javascript:UpdatePost('Games')">Games</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-item nav-link categories">House</a>
+                <a href="#" class="nav-item nav-link categories" onclick="javascript:UpdatePost('House')">House</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-item nav-link categories">Garden</a>
+                <a href="#" class="nav-item nav-link categories" onclick="javascript:UpdatePost('Garden')">Garden</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-item nav-link categories">Health and Care</a>
+                <a href="#" class="nav-item nav-link categories" onclick="javascript:UpdatePost('Health and Care')">Health and Care</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-item nav-link categories">Clothing</a>
+                <a href="#" class="nav-item nav-link categories" onclick="javascript:UpdatePost('Colthing')">Clothing</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-item nav-link categories">Sport</a>
+                <a href="#" class="nav-item nav-link categories" onclick="javascript:UpdatePost('Sport')">Sport</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-item nav-link categories">Vehicle</a>
+                <a href="#" class="nav-item nav-link categories" onclick="javascript:UpdatePost('Vehicle')">Vehicle</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-item nav-link categories">Office</a>
+                <a href="#" class="nav-item nav-link categories" onclick="javascript:UpdatePost('Office')">Office</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-item nav-link categories">Services</a>
+                <a href="#" class="nav-item nav-link categories" onclick="javascript:UpdatePost('Services')">Services</a>
             </li>
 
         </ul>

@@ -12,9 +12,9 @@
         <div class="navbar-nav mx-auto">
                 <form class="form-inline my-2 my-lg-0 w-70">
                     <div class="input-group">
-                        <input class="form-control mr-sm-2 form-control-underlined w-90" type="search" placeholder="Search" aria-label="Search">
+                        <input class="form-control mr-sm-2 form-control-underlined w-90" type="search" placeholder="Search" aria-label="Search" id="Searchfield" >
                         <div class="input-group-append">
-                            <button class="btn btn-link text-primary my-2 my-sm-0" type="submit"><i class="fa fa-search" style="color: #008CD8"></i></button>
+                            <button class="btn btn-link text-primary my-2 my-sm-0" type="submit" onclick="javascript:UpdatePost('Search')"><i class="fa fa-search" style="color: #008CD8" ></i></button>
                         </div>
                     </div>
                 </form>
@@ -55,10 +55,6 @@
                 <div class="form-group">
                   <label for="form-group">Description</label>
                   <textarea class="form-control" id="PDescritpion" name="description" rows="3" required></textarea>
-                </div>
-                <div class="form-group">
-                  <label for="form-group">Contact Information</label>
-                  <textarea class="form-control" id="PCInfos" rows="3" name="contactinfo" required></textarea>
                 </div>
                 <div class="form-group">
                   <label for="form-group">Select Category</label>

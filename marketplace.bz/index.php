@@ -56,8 +56,7 @@
         </div>
         <div class="col-md-8 col-sm-12 ml-sm-auto">
 					<br><br>
-				  <form method="post"><input id="button" type="submit" onclick="getConnection()"></a></form>
-        	<?php require_once("scripts/scr.PostList.php"); ?>
+        	<?php require_once("scripts/PostList.php"); ?>
         	<?php require_once("scripts/scr.Footer.php"); ?>
         </div>
         <div class="col-md-2 d-none d-md-block">
