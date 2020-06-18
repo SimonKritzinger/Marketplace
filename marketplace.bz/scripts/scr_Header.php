@@ -4,7 +4,7 @@
     <button class="navbar-toggler" type="button" onclick="sidebarTogglerClick()" id="sidebarToggler" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" style="color: #008CD8" href="#">Marketplace</a>
+    <a class="navbar-brand" style="color: #008CD8" href="">Marketplace</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -14,7 +14,7 @@
                     <div class="input-group">
                         <input class="form-control mr-sm-2 form-control-underlined w-90" type="search" placeholder="Search" aria-label="Search" id="Searchfield" >
                         <div class="input-group-append">
-                            <button class="btn btn-link text-primary my-2 my-sm-0" type="submit" onclick="javascript:UpdatePost('Search')"><i class="fa fa-search" style="color: #008CD8" ></i></button>
+                            <button class="btn btn-link text-primary my-2 my-sm-0" type="submit" onclick="javascript:UpdatePost('Search'); return false"><i class="fa fa-search" style="color: #008CD8" ></i></button>
                         </div>
                     </div>
                 </form>
@@ -31,12 +31,12 @@
           </li>
           <li class="nav-item" id="hlogoffbutton" style="display: none">
             <button type="button"  class="nav-item nav-link btn btn-info"  id="logoffbutton" onclick="javascript:LogOut()" >Logout</button>
-          </li> 
+          </li>
         </ul>
     </div>
 </nav>
 
-<div class="modal" tabindex="-1" role="dialog" id="CreatePostForm" > 
+<div class="modal" tabindex="-1" role="dialog" id="CreatePostForm" >
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -84,7 +84,7 @@
           </form>
         </div>
       </div>
-      
+
     </div>
   </div>
 </div>
@@ -140,7 +140,7 @@
           <input type="text"  class="form-control validate" name="rname" id="rnameid" placeholder="Enter name" required>
           <label >Your name</label>
         </div>
-        
+
         <div class="md-form mb-4">
           <i class="fas fa-lock prefix grey-text"></i>
           <input type="text"  class="form-control validate" name="runame" id="runameid" placeholder="Enter username" required>
@@ -154,7 +154,7 @@
         </div>
 
         <div class="alert alert-danger collapse" role="alert" id="Registeremailalert">
-          <strong>Please insert missing Data</strong> 
+          <strong>Please insert missing Data</strong>
           <button type="button" class="close" id="healert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
           </button>
@@ -183,7 +183,3 @@ $("#healert").click(function(){
         $('#sidebar[aria-expanded=true]').attr('aria-expanded', 'false');
     };
 </script>
-
-
-
-
