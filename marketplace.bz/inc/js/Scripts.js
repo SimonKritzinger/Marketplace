@@ -126,14 +126,16 @@ function LogOut(){
 
 function UpdatePost(userinput){
 
-  
-  var searchtext = document.getElementById("Searchfield").value;
+  var searchtext =  document.getElementById("Searchfield").value;
   
   if(!searchtext && userinput == "Search"){
 
     alert("Please enter something to search for");
     
   }else{
+
+    searchtext = "%" + searchtext +"%";
+    
     document.getElementById("Post").innerHTML="";
     $.ajax
   ({
@@ -168,14 +170,14 @@ function UpdatePost(userinput){
         
          
         $('#Post').append('<div class="col-md-4">' +
-              '<div class="card mb-4 box-shadow" data-toggle="modal" data-target="#'+ postid +' ">'+
+              '<div class="card mb-4 box-shadow" data-toggle="modal" onclick="ToggleModal(this.id)" id="#'+ postid +'">'+
                 '<img class="card-img-top" alt="'+images + '" style="height:225px;width:100%;display:block;"'+
                 'src="inc/images/' +images+ '" data-holder-rendered="true">'+
                 '<hr style="margin-top:0rem;margin-bottom:0rem;">'+
                 '<div class="card-body">'+
                   '<div class="d-flex justify-content-between align-items-center">'+
                     '<small class="text-muted" style="font-size:18px">' +titel+ '</small>'+
-                    '<span class="border border-primary rounded blue-box">' +category + '</span>'+
+                    '<medium class="border border-primary rounded blue-box">' +category + '</medium>'+
                   '</div>'+
                 '</div>'+
               '</div>'+
@@ -192,8 +194,7 @@ function UpdatePost(userinput){
                   '<div class="modal-body">'+
                     '<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="'+images +'" style="height:225px;width:225px;display:block;"'+
                     'src="inc/images/'+ images +'" data-holder-rendered="true">'+
-                    '<hr style="margin-top:0rem;margin-bottom:0rem;">'+
-                    description+
+                    '<hr style="margin-top:0rem;margin-bottom:0rem;">'+ description+
                   '</div>'+
                   '<div class="modal-footer">'+
                     '<small class="text-muted" style="font-size:18px;margin:auto">Contact:' +email +'</small>'+
@@ -209,6 +210,12 @@ function UpdatePost(userinput){
     }
   });
   } 
-   
+  
+  sidebarTogglerClick();
  
+}
+
+function ToggleModal(id){
+  var res = id.replace("#", "");
+  $("#"+res).modal('show');
 }

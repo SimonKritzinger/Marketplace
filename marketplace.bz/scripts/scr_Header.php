@@ -4,7 +4,7 @@
     <button class="navbar-toggler" type="button" onclick="sidebarTogglerClick()" id="sidebarToggler" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" style="color: #008CD8" href="#">Marketplace</a>
+    <a class="navbar-brand" style="color: #008CD8" href="">Marketplace</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -14,7 +14,7 @@
                     <div class="input-group">
                         <input class="form-control mr-sm-2 form-control-underlined w-90" type="search" placeholder="Search" aria-label="Search" id="Searchfield" >
                         <div class="input-group-append">
-                            <button class="btn btn-link text-primary my-2 my-sm-0" type="submit" onclick="javascript:UpdatePost('Search')"><i class="fa fa-search" style="color: #008CD8" ></i></button>
+                            <button class="btn btn-link text-primary my-2 my-sm-0" type="submit" onclick="javascript:UpdatePost('Search'); return false"><i class="fa fa-search" style="color: #008CD8" ></i></button>
                         </div>
                     </div>
                 </form>
@@ -45,7 +45,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" >
         <div class="col-md-16">
           <form method="post" action="/inc/classes/file_upload.php" enctype="multipart/form-data" id="upload_form">
                 <div class="form-group">

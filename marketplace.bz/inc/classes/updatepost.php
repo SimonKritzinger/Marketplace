@@ -10,6 +10,7 @@ $db_connection = pg_pconnect("host=localhost port=5433 dbname=Marketplace user=A
        $searchtext = $_POST['searchinput'];
 
        $sql = "SELECT postid, category, titel,  description, primaryimage , email FROM post join muser on muser.userid = post.userid AND titel ILIKE $1 ORDER BY creationtime DESC;";
+       //$searchtext =$searchtext +"%";
        $result = pg_query_params($db_connection, $sql, array($searchtext));
 
                 if(!$result){
