@@ -11,7 +11,7 @@ function Register(){
     $("#Registeremailalert").show();
 
   }else{
-    
+
     $.ajax
     ({
       type:'POST',
@@ -22,14 +22,14 @@ function Register(){
       name:name,
       username:username,
       },
-  
+
       success:function(data){
          if(data){
           var result = JSON.parse(data);
           alert(result.message);
 
           if(result.message =="Registration complete"){
-             window.location.href="index.php"; 
+             window.location.href="index.php";
           }
          }
       }
@@ -48,7 +48,7 @@ if(pass=="" || email=="" ){
   $("#Registeremailalert").show();
 
 }else{
-  
+
   $.ajax
   ({
     type:'POST',
@@ -79,7 +79,7 @@ if(pass=="" || email=="" ){
 function CreatePost(){
 
   var formData = new FormData($('#upload_form')[0]);
-  
+
     $.ajax
     ({
       type:'POST',
@@ -100,11 +100,11 @@ function CreatePost(){
          }
       }
     });
-  
+
 }
 
 function LogOut(){
-    
+
     $.ajax
     ({
       type:'POST',
@@ -116,7 +116,7 @@ function LogOut(){
           alert(result.message);
 
           if(result.message =="Logout completed"){
-            
+
             window.location.href="index.php";
           }
          }
@@ -131,7 +131,7 @@ function UpdatePost(userinput){
   if(!searchtext && userinput == "Search"){
 
     alert("Please enter something to search for");
-    
+
   }else{
 
     searchtext = "%" + searchtext +"%";
@@ -139,7 +139,7 @@ function UpdatePost(userinput){
     document.getElementById("Post").innerHTML="";
     $.ajax
   ({
-    
+
     type:'POST',
     url:'inc/classes/updatepost.php',
     async: false,
@@ -160,15 +160,15 @@ function UpdatePost(userinput){
       }else{
 
         result.forEach(function(item){
-          
+
           var postid = item.postid;
           var category = item.category;
           var titel = item.titel;
           var description = item.description;
           var images = item.primaryimage;
           var email = item.email;
-        
-         
+
+
         $('#Post').append('<div class="col-md-4">' +
               '<div class="card mb-4 box-shadow" data-toggle="modal" onclick="ToggleModal(this.id)" id="#'+ postid +'">'+
                 '<img class="card-img-top" alt="'+images + '" style="height:225px;width:100%;display:block;"'+
@@ -202,11 +202,11 @@ function UpdatePost(userinput){
                 '</div>'+
               '</div>'+
             '</div>')
-          
+
         });
 
       }
-        
+
     }
   });
   } 
