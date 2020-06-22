@@ -42,6 +42,10 @@
         </div>
         <div class="col-md-8 col-sm-12 ml-sm-auto">
 					<br><br>
+					<!-- this is a test button which can be used to check the connection to the database -->
+					<!--
+					<button onclick="getConnection();">TestConnection</button>
+					-->
         	<?php require_once("webStructure/PostList.php"); ?>
         	<?php require_once("webStructure/Footer.php"); ?>
         </div>
