@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="../inc/css/NavBar.css">
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top navbar-bottom-border">
     <button class="navbar-toggler" type="button" onclick="sidebarTogglerClick()" id="sidebarToggler" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -168,14 +166,13 @@
 </div>
 
 <script>
-$("#healert").click(function(){
-        $("#Registeremailalert").toggle();
-    });
+  $("#healert").click(function(){
+    $("#Registeremailalert").toggle();
+  });
 </script>
 
 <script>
     function sidebarTogglerClick() {
-        console.log("sers")
         // open or close navbar
         $('#sidebar').toggleClass('d-none');
         $('#sidebar').toggleClass('d-block');

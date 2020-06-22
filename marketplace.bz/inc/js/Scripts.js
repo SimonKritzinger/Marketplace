@@ -1,3 +1,24 @@
+function Checkifloggedin(){
+  $.ajax
+  ({
+  type:'POST',
+  url:'inc/phpFunction/logincheck.php',
+
+  success:function(data){
+     if(data){
+      var result = JSON.parse(data);
+
+      if(result.message =="already logged in"){
+        $('#LoginForm').modal('hide');
+        document.getElementById("lbutton").style.display='none';
+        document.getElementById("rbutton").style.display='none';
+        document.getElementById("hpostbutton").style.display='block';
+        document.getElementById("hlogoffbutton").style.display='block';
+      }
+     }
+  }
+  });
+}
 
 function Register(){
 
@@ -15,7 +36,7 @@ function Register(){
     $.ajax
     ({
       type:'POST',
-      url:'inc/classes/registeruser.php',
+      url:'inc/phpFunction/registeruser.php',
       data:{
       email:email,
       password:pass,
@@ -52,7 +73,7 @@ if(pass=="" || email=="" ){
   $.ajax
   ({
     type:'POST',
-    url:'inc/classes/Login.php',
+    url:'inc/phpFunction/Login.php',
     data:{
     email:email,
     password:pass,
@@ -84,7 +105,7 @@ function CreatePost(){
     ({
       type:'POST',
       enctype: 'multipart/form-data',
-      url:'inc/classes/createpost.php',
+      url:'inc/phpFunction/createpost.php',
       data:formData,
       contentType: false,
       processData: false,
@@ -108,7 +129,7 @@ function LogOut(){
     $.ajax
     ({
       type:'POST',
-      url:'inc/classes/logoff.php',
+      url:'inc/phpFunction/logoff.php',
 
       success:function(data){
          if(data){
@@ -127,7 +148,7 @@ function LogOut(){
 function UpdatePost(userinput){
 
   var searchtext =  document.getElementById("Searchfield").value;
-  
+
   if(!searchtext && userinput == "Search"){
 
     alert("Please enter something to search for");
@@ -135,13 +156,13 @@ function UpdatePost(userinput){
   }else{
 
     searchtext = "%" + searchtext +"%";
-    
+
     document.getElementById("Post").innerHTML="";
     $.ajax
   ({
 
     type:'POST',
-    url:'inc/classes/updatepost.php',
+    url:'inc/phpFunction/updatepost.php',
     async: false,
     data:{
     input:userinput,
@@ -209,13 +230,16 @@ function UpdatePost(userinput){
 
     }
   });
-  } 
-  
+  }
   sidebarTogglerClick();
- 
+
 }
 
 function ToggleModal(id){
   var res = id.replace("#", "");
   $("#"+res).modal('show');
 }
+
+$(document).ready(function(){
+  console.log("ready");
+});

@@ -2,6 +2,7 @@
 
   class Functions{
 
+    //Was used in the getConnection() method (in javascript in the index.php) to check if the connection to the database works
     public static function getConnectionStatus(){
 			$ret = "";
 			//https://www.a2hosting.com/kb/developer-corner/postgresql/connect-to-postgresql-using-php
@@ -19,14 +20,14 @@
 
     public function getAllPosts(){
       $db_connection = pg_pconnect("host=localhost port=5433 dbname=Marketplace user=Admin password=master69key420");
-      
+
       if(!$db_connection){
         echo "An Error occured while trying to connect to the Database.\n";
         exit;
       }else{
           $sql = "SELECT * FROM post join muser on muser.userid = post.userid ORDER BY creationtime DESC;";
         }
-    
+
         $result = pg_query($db_connection,$sql);
         if(!$result){
           echo "An Error occured while trying to query the Database.\n";
@@ -86,8 +87,8 @@
             }
           }
         }
+        pg_close($db_connection);
       }
     }
 
-    pg_close($db_connection);
  ?>

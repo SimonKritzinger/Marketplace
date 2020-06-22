@@ -2,7 +2,7 @@
     <div class="row" id="Post">
 
       <?php
-        require_once 'inc\classes\Functions.php';
+        require_once 'inc\phpFunction\Functions.php';
         $postdb = new Functions();
         $postdb->getAllPosts();
       ?>
