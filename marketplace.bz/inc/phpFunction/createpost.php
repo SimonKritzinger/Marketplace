@@ -4,6 +4,9 @@
         $titel = $_POST['titel'];
         $category = $_POST['category'];
 
+        //If it is not possible to create posts, the problem is that, uploading pictures from the webpage
+        //doesn't work on relative paths, which is why we used a absolute path.
+        //(absolute paths might not work for anyone else)
         $upload_dir = "C:\WAMP.NET\sites\marketplace.bz\marketplace.bz\inc\images".DIRECTORY_SEPARATOR;
         $allowed_types = array('jpg', 'png', 'jpeg', 'gif');
 
