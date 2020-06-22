@@ -4,7 +4,7 @@
         $titel = $_POST['titel'];
         $category = $_POST['category'];
 
-        $upload_dir = "\sites\marketplace.bz\marketplace.bz\inc\images".DIRECTORY_SEPARATOR;
+        $upload_dir = "C:\WAMP.NET\sites\marketplace.bz\marketplace.bz\inc\images".DIRECTORY_SEPARATOR;
         $allowed_types = array('jpg', 'png', 'jpeg', 'gif');
 
         $maxsize = 2 * 1024 * 1024;
